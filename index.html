@@ -48,7 +48,8 @@
     <form id="orderForm">
       <label>Nom : <input type="text" name="name" required /></label>
       <label>Choix du tiramisu :
-        <select name="flavor">
+        <select name="flavor" required>
+          <option value="">-- Choisissez une saveur --</option>
           <option value="fraise">Tiramisu Fraise</option>
           <option value="cookie">Tiramisu Cookie</option>
           <option value="speculoos">Tiramisu Spéculoos</option>
@@ -57,6 +58,9 @@
       </label>
       <label>Quantité : <input type="number" name="quantity" min="1" value="1" required /></label>
       <label>Email : <input type="email" name="email" required /></label>
+      <label>Message (adresse ou remarque) :
+        <textarea name="message" placeholder="Optionnel"></textarea>
+      </label>
       <button type="submit">Envoyer la commande</button>
     </form>
     <div id="orderConfirmation" class="hidden">✅ Merci ! Votre commande a bien été envoyée.</div>
@@ -68,6 +72,42 @@
     <p>Scannez ce QR code pour accéder directement à la page de commande.</p>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById("orderForm");
+    const confirmation = document.getElementById("orderConfirmation");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        flavor: form.flavor.value,
+        quantity: form.quantity.value,
+        message: form.message.value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbyfB6fadSlsgpglldZTjE2E0hP-mPeGinqs9vCivrSBtInvFnbf7FKu9-O6JjOi7G4N7g/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.text())
+      .then(response => {
+        if (response === "OK") {
+          confirmation.classList.remove("hidden");
+          form.reset();
+        } else {
+          alert("Erreur lors de l'envoi. Veuillez réessayer.");
+        }
+      })
+      .catch(error => {
+        console.error("Erreur :", error);
+        alert("Une erreur s'est produite.");
+      });
+    });
+  </script>
 </body>
 </html>
