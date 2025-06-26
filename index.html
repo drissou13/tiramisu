@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiramisu Délices</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="lang-switcher">
+    <button onclick="setLanguage('fr')">Français 🇫🇷</button>
+    <button onclick="setLanguage('en')">English 🇬🇧</button>
+  </div>
+
+  <div class="container">
+    <h1 id="headline" data-i18n="headline">Bienvenue chez <span class="highlight">Tiramisu Délices</span></h1>
+    <p class="subtitle" data-i18n="subtitle">Un nuage de douceur, une pincée d’amour, et un tiramisu inoubliable...</p>
+    <button onclick="showMessage()" data-i18n="discover">Découvrir nos créations</button>
+    <div id="extraMessage" class="hidden" data-i18n="extra">Préparez vos papilles, l'aventure gourmande commence ici 🍰</div>
+  </div>
+
+  <section class="menu">
+    <h2 class="menu-title" data-i18n="menu-title">Nos créations maison</h2>
+
+    <div class="item">
+      <h3 data-i18n="fraise-title">Tiramisu Fraise <span class="price">7,00 €</span></h3>
+      <p data-i18n="fraise-desc">🍓 Une crème légère et onctueuse, des fraises fraîches et juteuses...</p>
+    </div>
+
+    <div class="item">
+      <h3 data-i18n="cookie-title">Tiramisu Cookie <span class="price">7,00 €</span></h3>
+      <p data-i18n="cookie-desc">🍪 Le tiramisu cookie de <em>@cj.tiramisu</em>, c’est la rencontre parfaite entre fondant et croquant !...</p>
+    </div>
+
+    <div class="item">
+      <h3 data-i18n="speculoos-title">Tiramisu Spéculoos <span class="price">7,00 €</span></h3>
+      <p data-i18n="speculoos-desc">🍂 Le tiramisu spéculoos de <em>@cj.tiramisu</em>, c’est la douceur épicée...</p>
+    </div>
+
+    <div class="item">
+      <h3 data-i18n="mns-title">Tiramisu M&Ns <span class="price">7,00 €</span></h3>
+      <p data-i18n="mns-desc">🍫 Un kaléidoscope de saveurs chocolatées t’attend avec notre tiramisu M&Ns !...</p>
+    </div>
+  </section>
+
+  <section class="order">
+    <h2>Passer une commande</h2>
+    <form id="orderForm">
+      <label>Nom : <input type="text" name="name" required /></label>
+      <label>Choix du tiramisu :
+        <select name="flavor">
+          <option value="fraise">Tiramisu Fraise</option>
+          <option value="cookie">Tiramisu Cookie</option>
+          <option value="speculoos">Tiramisu Spéculoos</option>
+          <option value="mns">Tiramisu M&Ns</option>
+        </select>
+      </label>
+      <label>Quantité : <input type="number" name="quantity" min="1" value="1" required /></label>
+      <label>Email : <input type="email" name="email" required /></label>
+      <button type="submit">Envoyer la commande</button>
+    </form>
+    <div id="orderConfirmation" class="hidden">✅ Merci ! Votre commande a bien été envoyée.</div>
+  </section>
+
+  <section class="qr">
+    <h2>Commandez en un scan 📱</h2>
+    <img src="qr-code.png" alt="QR Code pour commander" width="200" />
+    <p>Scannez ce QR code pour accéder directement à la page de commande.</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
